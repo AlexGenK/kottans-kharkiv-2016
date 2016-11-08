@@ -1,20 +1,16 @@
 class Position
 
-	@h={}
-
 	def initialize pos
-			@h=pos
+			@positions=pos
 	end
 
   def occupied figure=nil
-    figure ? proc {|i| @h[i].to_s.include? figure.to_s} : proc {|i| @h[i]}
+    figure ? proc {|i| /#{figure}/===@positions[i]} : proc {|i| @positions[i]}
   end
 
   def to_proc
     proc do |i| 
-      result_array=[]
-      result_array << i
-      result_array << (@h[i] ? @h[i] : :empty)
+      [i , @positions[i] ||= :empty]
     end
   end
 
