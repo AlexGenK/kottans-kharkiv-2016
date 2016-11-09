@@ -1,0 +1,12 @@
+<h1>Show message</h1>
+<textarea id="aes_message" hidden="true"><%= @m.body %></textarea>
+<label for="password">Password</label>
+<input type="text" id="password" class="u-full-width">
+<br>
+<br>
+<!-- при нажатии на кнопку запускается функция расшифровки сообщения -->
+<input type="button" class="button-primary" value="Decrypt" onclick="decrypt_message('#aes_message', '#password', '#message')">
+<br>
+<label for="message">Message</label>
+<textarea id="message" class="u-full-width"></textarea><br>
+<a class="button" href="/">Return to main page</a>
