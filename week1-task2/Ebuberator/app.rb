@@ -2,7 +2,7 @@ module Ebuberable
 
   def map(&block)
     out=[]
-    each {|item| out << block.call(item)}
+    block_given? ? each {|item| out << block.call(item)} : each {|item| out << item}
     out
   end
 
@@ -30,18 +30,11 @@ module Ebuberable
     true
   end
 
-  def reduce(param1=nil, param2=nil, &block)
-    if block==nil
-      if param2==nil
-        sym, accum = param1, param2
-      else
-        sym, accum = param2, param1
-      end
-      each {|item| accum ? accum=accum.send(sym, item) : accum=item}
-    else
-      accum = param1
-      each {|item| accum ? accum=block.call(accum, item) : accum=item}
-    end
+  def reduce(*args, &block)
+    accum=nil
+    block=args.last.to_proc if Symbol===args.last
+    accum=args.first unless Symbol===args.first
+    each {|item| accum ? accum=block.call(accum, item) : accum=item}
     accum
   end
 
