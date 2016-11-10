@@ -25,7 +25,7 @@ module Ebuberable
   end
 
   def all?(&block)
-    block||=proc{|item| item}
+    block ||= :itself.to_proc
     each {|item| return false unless block.call(item)}
     true
   end
