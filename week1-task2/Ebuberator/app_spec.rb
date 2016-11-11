@@ -17,8 +17,8 @@ end
 describe Ebuberable do
 
   it "has realised map method" do
-    z=FiveLittlePigs.new.map
-    expect(z).to eq ['Ниф-Ниф', 'Наф-Наф', 'Нуф-Нуф', 'Ноф-Наф', 'Ниф+Няф']
+    z=FiveLittlePigs.new.map.map{|i| "Поросенок #{i}"}
+    expect(z).to eq ['Поросенок Ниф-Ниф', 'Поросенок Наф-Наф', 'Поросенок Нуф-Нуф', 'Поросенок Ноф-Наф', 'Поросенок Ниф+Няф']
   end
 
   it "has realised map method with block" do

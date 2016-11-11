@@ -2,7 +2,7 @@ module Ebuberable
 
   def map(&block)
     out=[]
-    block_given? ? each {|item| out << block.call(item)} : each {|item| out << item}
+    block_given? ? each {|item| out << block.call(item)} : out=to_enum(:each)
     out
   end
 
@@ -32,8 +32,8 @@ module Ebuberable
 
   def reduce(*args, &block)
     accum=nil
-    block=args.last.to_proc if Symbol===args.last
-    accum=args.first unless Symbol===args.first
+    block=args.last.to_proc if args.last.is_a? Symbol
+    accum=args.first unless args.first.is_a? Symbol
     each {|item| accum ? accum=block.call(accum, item) : accum=item}
     accum
   end
